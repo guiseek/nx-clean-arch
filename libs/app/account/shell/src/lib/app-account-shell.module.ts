@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router';
+
+import { LayoutModule } from '@angular/cdk/layout';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { AppSharedUiMaterialModule } from '@nx-clean-arch/app/shared/ui/material';
 
 import { AccountsContainer } from './containers/accounts/accounts.container';
 import { CreateAccountForm } from './components/create-account/create-account.form';
@@ -11,6 +16,9 @@ import { ListAccountsComponent } from './components/list-accounts/list-accounts.
 @NgModule({
   imports: [
     CommonModule,
+    LayoutModule,
+    OverlayModule,
+    AppSharedUiMaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       {
@@ -26,4 +34,4 @@ import { ListAccountsComponent } from './components/list-accounts/list-accounts.
     ListAccountsComponent,
   ],
 })
-export class AppAccountShellModule {}
+export class AppAccountShellModule { }

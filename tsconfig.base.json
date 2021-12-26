@@ -30,6 +30,9 @@
       "@nx-clean-arch/app/account/shell": [
         "libs/app/account/shell/src/index.ts"
       ],
+      "@nx-clean-arch/app/shared/ui/material": [
+        "libs/app/shared/ui/material/src/index.ts"
+      ],
       "@nx-clean-arch/core/entities": ["libs/core/entities/src/index.ts"]
     }
   },

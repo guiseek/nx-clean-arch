@@ -9,6 +9,7 @@
     "app-account-domain": "libs/app/account/domain",
     "app-account-shell": "libs/app/account/shell",
     "app-e2e": "apps/app-e2e",
+    "app-shared-ui-material": "libs/app/shared/ui/material",
     "core-entities": "libs/core/entities"
   }
 }

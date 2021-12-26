@@ -1,29 +1,68 @@
-<h1>accounts works!</h1>
-
-<nx-clean-arch-list-accounts
-  [accounts]="facade.accounts$ | async"
-  (update)="update($event)"
-  (remove)="removeAccount($event)"
-></nx-clean-arch-list-accounts>
-
-<div class="relative" *ngIf="action$ | async as action">
-  <div>
-    <button type="button" [disabled]="action === 'create'" (click)="create()">
-      Criar
+<div
+  class="accounts-container"
+  [class.accounts-is-mobile]="mobileQuery.matches"
+>
+  <mat-toolbar color="primary" class="accounts-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
-  </div>
+    <h1 class="accounts-app-name">Responsive App</h1>
+  </mat-toolbar>
 
-  <nx-clean-arch-create-account
-    class="absolute"
-    [ngClass]="{ hidden: action !== 'create' }"
-    (cancel)="cancel()"
-    (send)="createAccount($event)"
-  ></nx-clean-arch-create-account>
+  <mat-sidenav-container
+    class="accounts-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <nx-clean-arch-update-account
+        (cancel)="cancel()"
+        (send)="updateAccount($event)"
+      ></nx-clean-arch-update-account>
+    </mat-sidenav>
 
-  <nx-clean-arch-update-account
-    class="absolute"
-    [ngClass]="{ hidden: action !== 'edit' }"
-    (cancel)="cancel()"
-    (send)="updateAccount($event)"
-  ></nx-clean-arch-update-account>
+    <mat-sidenav-content>
+
+      <mat-toolbar>
+        <h1>accounts works!</h1>
+      </mat-toolbar>
+
+      <nx-clean-arch-list-accounts
+        [accounts]="facade.accounts$ | async"
+        (update)="update($event)"
+        (remove)="removeAccount($event)"
+      ></nx-clean-arch-list-accounts>
+
+      <div class="relative" *ngIf="action$ | async as action">
+        <ng-template
+          cdkConnectedOverlay
+          [cdkConnectedOverlayOrigin]="trigger"
+          [cdkConnectedOverlayOpen]="action === 'create'"
+        >
+          <mat-card>
+            <nx-clean-arch-create-account
+              (cancel)="cancel()"
+              (send)="createAccount($event)"
+            ></nx-clean-arch-create-account>
+          </mat-card>
+        </ng-template>
+
+        <button
+          mat-fab
+          type="button"
+          cdkOverlayOrigin
+          #trigger="cdkOverlayOrigin"
+          class="fixed bottom-right"
+          [disabled]="action === 'create'"
+          (click)="create()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

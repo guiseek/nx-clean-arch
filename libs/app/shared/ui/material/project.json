@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/app/shared/ui/material",
+  "sourceRoot": "libs/app/shared/ui/material/src",
+  "prefix": "mat",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/app/shared/ui/material"],
+      "options": {
+        "project": "libs/app/shared/ui/material/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/app/shared/ui/material/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/app/shared/ui/material/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/app/shared/ui/material"],
+      "options": {
+        "jestConfig": "libs/app/shared/ui/material/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/app/shared/ui/material/src/**/*.ts",
+          "libs/app/shared/ui/material/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:ui", "scope:shared"]
+}

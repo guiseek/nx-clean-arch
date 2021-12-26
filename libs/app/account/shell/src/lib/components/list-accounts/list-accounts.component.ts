@@ -7,6 +7,8 @@ import { Account } from '@nx-clean-arch/core/entities';
   styleUrls: ['./list-accounts.component.scss']
 })
 export class ListAccountsComponent {
+  displayedColumns: string[] = ['id', 'displayName', 'email', 'action'];
+
   @Input() accounts: Account[] | null = []
 
   @Output() update = new EventEmitter<Account>()

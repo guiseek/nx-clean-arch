@@ -1,22 +1,23 @@
 <form [formGroup]="form" ngNativeValidate (ngSubmit)="createAccount()">
-  <section>
-    <label for="displayName">Nome visível</label>
+  <mat-form-field>
+    <mat-label for="displayName">Nome visível</mat-label>
     <input
+      matInput
+      autofocus
       type="text"
       id="displayName"
       formControlName="displayName"
       required
     />
-  </section>
-  <section>
-    <label for="email">Email</label>
-    <input type="email" id="email" formControlName="email" required />
-  </section>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label for="email">Email</mat-label>
+    <input matInput type="email" id="email" formControlName="email" required />
+  </mat-form-field>
 
   <footer>
-    <button type="button" (click)="cancel.emit()">Cancelar</button>
-    <button type="reset">Limpar</button>
-    <button type="submit">Enviar</button>
+    <button mat-button type="button" (click)="cancel.emit()">Cancelar</button>
+    <button mat-button type="reset">Limpar</button>
+    <button mat-button type="submit">Enviar</button>
   </footer>
-
 </form>

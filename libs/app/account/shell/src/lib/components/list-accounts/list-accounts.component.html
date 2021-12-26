@@ -1,14 +1,34 @@
-<table>
-  <tbody>
-    <tr *ngFor="let account of accounts">
-      <td>{{ account.id }}</td>
-      <td>{{ account.displayName }}</td>
-      <td>{{ account.email }}</td>
-      <td>
-        <button type="button" (click)="update.emit(account)">Alterar</button>
+<ng-container *ngIf="accounts">
+  <table mat-table [dataSource]="accounts" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
 
-        <button type="button" (click)="remove.emit(account.id)">Remover</button>
+    <ng-container matColumnDef="displayName">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let element">{{ element.displayName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button type="button" (click)="update.emit(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button type="button" (click)="remove.emit(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-container>

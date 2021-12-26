@@ -6,19 +6,58 @@
       <td>{{ account.id }}</td>
       <td>{{ account.displayName }}</td>
       <td>{{ account.email }}</td>
+      <td>
+
+        <button type="button" (click)="update(account)">Alterar</button>
+
+        <button type="button" (click)="removeAccount(account.id)">Remover</button>
+
+      </td>
     </tr>
   </tbody>
 </table>
 
-<form [formGroup]="createForm" ngNativeValidate (ngSubmit)="createAccount()">
-  <section>
-    <label for="displayName">Nome visível</label>
-    <input type="text" id="displayName" formControlName="displayName" required />
-  </section>
-  <section>
-    <label for="email">Email</label>
-    <input type="email" id="email" formControlName="email" required />
-  </section>
+<button type="button" (click)="currentAction = 'create'">Criar</button>
 
-  <button type="submit">Enviar</button>
-</form>
+<ng-container [ngSwitch]="currentAction">
+  <ng-template [ngSwitchCase]="'create'">
+    <form [formGroup]="createForm" ngNativeValidate (ngSubmit)="createAccount()">
+      <section>
+        <label for="displayName">Nome visível</label>
+        <input type="text" id="displayName" formControlName="displayName" required />
+      </section>
+      <section>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" required />
+      </section>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'edit'">
+    <form [formGroup]="updateForm" ngNativeValidate (ngSubmit)="updateAccount()">
+      <section>
+        <label for="displayName">Nome visível</label>
+        <input type="text" id="displayName" formControlName="displayName" required />
+      </section>
+      <section>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" required />
+      </section>
+      <section>
+        <label for="isActive">Ativo</label>
+        <input type="checkbox" id="isActive" formControlName="isActive" />
+      </section>
+      <section>
+        <label for="isBanned">Banido</label>
+        <input type="checkbox" id="isBanned" formControlName="isBanned" />
+      </section>
+      <section>
+        <label for="isBeta">Beta</label>
+        <input type="checkbox" id="isBeta" formControlName="isBeta" />
+      </section>
+
+      <button type="submit">Salvar</button>
+    </form>
+  </ng-template>
+</ng-container>

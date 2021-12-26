@@ -26,6 +26,9 @@ export class AccountsService {
   constructor(accountRepository: AccountRepository) {
     this.findAllUseCase = new FindAllAccountsUseCase(accountRepository)
     this.createAccountUseCase = new CreateAccountUseCase(accountRepository)
+    this.updateAccountUseCase = new UpdateAccountUseCase(accountRepository)
+    this.findAccountByIdUseCase = new FindAccountByIdUseCase(accountRepository)
+    this.removeAccountUseCase = new RemoveAccountUseCase(accountRepository)
   }
 
   create(createAccountDto: CreateAccountDto) {

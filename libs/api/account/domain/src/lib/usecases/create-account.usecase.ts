@@ -1,9 +1,9 @@
 import { AccountRepository } from '../repositories/account.repository'
-import { UseCase } from '@nx-clean-arch/core/entities'
 import {
+  UseCase,
   CreateAccountInput,
   CreateAccountOutput,
-} from '../types/create-account'
+} from '@nx-clean-arch/core/entities'
 
 export class CreateAccountUseCase
   implements UseCase<CreateAccountInput, CreateAccountOutput>

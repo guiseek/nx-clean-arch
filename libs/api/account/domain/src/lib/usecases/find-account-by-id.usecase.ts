@@ -1,9 +1,9 @@
 import { AccountRepository } from '../repositories/account.repository'
-import { UseCase } from '@nx-clean-arch/core/entities'
 import {
+  UseCase,
   FindAccountByIdInput,
   FindAccountByIdOutput,
-} from '../types/find-account'
+} from '@nx-clean-arch/core/entities'
 
 export class FindAccountByIdUseCase
   implements UseCase<FindAccountByIdInput, FindAccountByIdOutput>

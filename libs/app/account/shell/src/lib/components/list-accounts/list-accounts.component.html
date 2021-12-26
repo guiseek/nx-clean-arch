@@ -1,0 +1,14 @@
+<table>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.id }}</td>
+      <td>{{ account.displayName }}</td>
+      <td>{{ account.email }}</td>
+      <td>
+        <button type="button" (click)="update.emit(account)">Alterar</button>
+
+        <button type="button" (click)="remove.emit(account.id)">Remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

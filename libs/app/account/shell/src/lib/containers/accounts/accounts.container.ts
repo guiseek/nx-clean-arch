@@ -1,101 +1,58 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs'
-import { FormBuilder, Validators } from '@angular/forms'
-import { Account } from '@nx-clean-arch/core/entities'
-import { HttpClient } from '@angular/common/http'
+import { UpdateAccountForm } from './../../components/update-account/update-account.form';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core'
+import { AccountFacade } from '@nx-clean-arch/app/account/data-access'
+import {
+  Account,
+  CreateAccountInput,
+  UpdateAccountInput,
+} from '@nx-clean-arch/core/entities'
+import { BehaviorSubject, Subject } from 'rxjs'
 
-
-function merge(target: Object, source: Object): Object {
-  return Object.assign(target, source)
-}
+type Action = 'onlyList' | 'create' | 'edit'
 
 @Component({
-  selector: 'nx-clean-arch-accounts',
   templateUrl: './accounts.container.html',
   styleUrls: ['./accounts.container.scss'],
 })
 export class AccountsContainer implements OnInit, OnDestroy {
   private _destroy = new Subject<void>()
 
-  private _accounts = new BehaviorSubject<Account[]>([])
-  readonly accounts$ = this._accounts.asObservable()
+  @ViewChild(UpdateAccountForm) updateForm!: UpdateAccountForm
 
-  currentAction: 'onlyList' | 'create' | 'edit' = 'onlyList'
+  private _action = new BehaviorSubject<Action>('onlyList')
+  readonly action$ = this._action.asObservable()
 
-  private _createForm = {
-    displayName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-  }
-
-  private _updateForm = merge(this._createForm, {
-    id: ['', [Validators.required]],
-    isActive: [false],
-    isBanned: [false],
-    isBeta: [false],
-  })
-
-
-  createForm = this.form.group(this._createForm)
-  updateForm = this.form.group(this._updateForm)
-
-  constructor(
-    private form: FormBuilder,
-    private http: HttpClient
-  ) {}
+  constructor(readonly facade: AccountFacade) {}
 
   ngOnInit(): void {
-    this.getAccounts()
+    this.facade.loadAccounts()
   }
 
-  getAccounts() {
-    this.http
-      .get<Account[]>('/api/accounts')
-      .pipe(takeUntil(this._destroy))
-      .subscribe((accounts) => {
-        console.log(accounts);
-
-        this._accounts.next(accounts)
-      })
+  create() {
+    this._action.next('create')
   }
 
   update(account: Account) {
-    this.updateForm.setValue(account)
-    this.currentAction = 'edit'
+    this.updateForm.form.setValue(account)
+    this._action.next('edit')
   }
 
-  createAccount() {
-    this.createForm.markAllAsTouched()
-
-    if (this.createForm.valid) {
-      this.http
-        .post<Account>(`/api/accounts`, this.createForm.value)
-        .subscribe((account) => {
-          this._accounts.next([...this._accounts.value, account])
-          this.createForm.reset()
-        })
-    }
+  cancel() {
+    this._action.next('onlyList')
   }
 
-  updateAccount() {
-    this.createForm.markAllAsTouched()
-
-    if (this.updateForm.valid) {
-      const { id, ...value } = this.updateForm.value
-      this.http
-        .patch<Account>(`/api/accounts/${id}`, { id, ...value })
-        .subscribe((account) => {
-          this.getAccounts()
-          this.updateForm.reset()
-        })
-    }
+  createAccount(account: CreateAccountInput) {
+    this.facade.createAccount(account)
+    this._action.next('onlyList')
   }
 
-  removeAccount(accountId: number) {
-    this.http
-      .delete(`/api/accounts/${accountId}`)
-      .subscribe(() => {
-        this.getAccounts()
-      })
+  updateAccount(account: UpdateAccountInput) {
+    this.facade.updateAccount(account)
+    this._action.next('onlyList')
+  }
+
+  removeAccount(id: number) {
+    this.facade.removeAccount(id)
   }
 
   ngOnDestroy(): void {

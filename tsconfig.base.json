@@ -24,6 +24,9 @@
       "@nx-clean-arch/app/account/data-access": [
         "libs/app/account/data-access/src/index.ts"
       ],
+      "@nx-clean-arch/app/account/domain": [
+        "libs/app/account/domain/src/index.ts"
+      ],
       "@nx-clean-arch/app/account/shell": [
         "libs/app/account/shell/src/index.ts"
       ],

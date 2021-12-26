@@ -1,4 +1,4 @@
-import { UpdateAccountInput } from '@nx-clean-arch/api/account/domain'
+import { UpdateAccountInput } from '@nx-clean-arch/core/entities'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 

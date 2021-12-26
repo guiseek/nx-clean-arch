@@ -1,0 +1,33 @@
+<form [formGroup]="form" ngNativeValidate (ngSubmit)="updateAccount()">
+  <section>
+    <label for="displayName">Nome visível</label>
+    <input
+      type="text"
+      id="displayName"
+      formControlName="displayName"
+      required
+    />
+  </section>
+  <section>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" required />
+  </section>
+  <section>
+    <label for="isActive">Ativo</label>
+    <input type="checkbox" id="isActive" formControlName="isActive" />
+  </section>
+  <section>
+    <label for="isBanned">Banido</label>
+    <input type="checkbox" id="isBanned" formControlName="isBanned" />
+  </section>
+  <section>
+    <label for="isBeta">Beta</label>
+    <input type="checkbox" id="isBeta" formControlName="isBeta" />
+  </section>
+
+  <footer>
+    <button type="button" (click)="cancel.emit()">Cancelar</button>
+    <button type="reset">Limpar</button>
+    <button type="submit">Enviar</button>
+  </footer>
+</form>

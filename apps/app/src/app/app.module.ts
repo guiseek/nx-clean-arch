@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClient, HttpClientModule } from '@angular/common/http'
+
+import { AccountFacade, AccountHttpService } from '@nx-clean-arch/app/account/data-access'
+import { AccountDataService } from '@nx-clean-arch/app/account/domain'
+import { Http } from '@nx-clean-arch/core/entities'
 
 import { AppComponent } from './app.component'
-import { NxWelcomeComponent } from './nx-welcome.component'
 import { RouterModule } from '@angular/router'
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -24,7 +27,26 @@ import { RouterModule } from '@angular/router'
       { initialNavigation: 'enabledBlocking' }
     ),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: Http,
+      useClass: HttpClient,
+    },
+    {
+      provide: AccountDataService,
+      useFactory: (http: Http) => {
+        return new AccountHttpService(http)
+      },
+      deps: [Http]
+    },
+    {
+      provide: AccountFacade,
+      useFactory: (dataService: AccountDataService) => {
+        return new AccountFacade(dataService)
+      },
+      deps: [AccountDataService]
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,23 @@
+{
+  "root": "libs/app/account/domain",
+  "sourceRoot": "libs/app/account/domain/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/app/account/domain/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/app/account/domain"],
+      "options": {
+        "jestConfig": "libs/app/account/domain/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:domain", "scope:account"]
+}

@@ -1,3 +1,2 @@
-export function appAccountDataAccess(): string {
-  return 'app-account-data-access'
-}
+export * from './infrastructure/account-http.service'
+export * from './application/account.facade'

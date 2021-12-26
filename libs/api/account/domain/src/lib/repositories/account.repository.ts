@@ -1,20 +1,14 @@
-import { Account } from '@nx-clean-arch/core/entities'
 import {
+  Account,
   FindAccountByIdInput,
   FindAccountByIdOutput,
-} from '../types/find-account'
-import {
   RemoveAccountInput,
   RemoveAccountOutput,
-} from '../types/remove-account'
-import {
   CreateAccountInput,
   CreateAccountOutput,
-} from './../types/create-account'
-import {
   UpdateAccountInput,
   UpdateAccountOutput,
-} from './../types/update-account'
+} from '@nx-clean-arch/core/entities'
 
 export abstract class AccountRepository {
   abstract findAll(): Promise<Account[]>

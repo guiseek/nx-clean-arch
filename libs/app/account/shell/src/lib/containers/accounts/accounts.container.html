@@ -1,63 +1,29 @@
-<p>accounts works!</p>
+<h1>accounts works!</h1>
 
-<table>
-  <tbody>
-    <tr *ngFor="let account of accounts$ | async">
-      <td>{{ account.id }}</td>
-      <td>{{ account.displayName }}</td>
-      <td>{{ account.email }}</td>
-      <td>
+<nx-clean-arch-list-accounts
+  [accounts]="facade.accounts$ | async"
+  (update)="update($event)"
+  (remove)="removeAccount($event)"
+></nx-clean-arch-list-accounts>
 
-        <button type="button" (click)="update(account)">Alterar</button>
+<div class="relative" *ngIf="action$ | async as action">
+  <div>
+    <button type="button" [disabled]="action === 'create'" (click)="create()">
+      Criar
+    </button>
+  </div>
 
-        <button type="button" (click)="removeAccount(account.id)">Remover</button>
+  <nx-clean-arch-create-account
+    class="absolute"
+    [ngClass]="{ hidden: action !== 'create' }"
+    (cancel)="cancel()"
+    (send)="createAccount($event)"
+  ></nx-clean-arch-create-account>
 
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<button type="button" (click)="currentAction = 'create'">Criar</button>
-
-<ng-container [ngSwitch]="currentAction">
-  <ng-template [ngSwitchCase]="'create'">
-    <form [formGroup]="createForm" ngNativeValidate (ngSubmit)="createAccount()">
-      <section>
-        <label for="displayName">Nome visível</label>
-        <input type="text" id="displayName" formControlName="displayName" required />
-      </section>
-      <section>
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" required />
-      </section>
-
-      <button type="submit">Enviar</button>
-    </form>
-  </ng-template>
-  <ng-template [ngSwitchCase]="'edit'">
-    <form [formGroup]="updateForm" ngNativeValidate (ngSubmit)="updateAccount()">
-      <section>
-        <label for="displayName">Nome visível</label>
-        <input type="text" id="displayName" formControlName="displayName" required />
-      </section>
-      <section>
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" required />
-      </section>
-      <section>
-        <label for="isActive">Ativo</label>
-        <input type="checkbox" id="isActive" formControlName="isActive" />
-      </section>
-      <section>
-        <label for="isBanned">Banido</label>
-        <input type="checkbox" id="isBanned" formControlName="isBanned" />
-      </section>
-      <section>
-        <label for="isBeta">Beta</label>
-        <input type="checkbox" id="isBeta" formControlName="isBeta" />
-      </section>
-
-      <button type="submit">Salvar</button>
-    </form>
-  </ng-template>
-</ng-container>
+  <nx-clean-arch-update-account
+    class="absolute"
+    [ngClass]="{ hidden: action !== 'edit' }"
+    (cancel)="cancel()"
+    (send)="updateAccount($event)"
+  ></nx-clean-arch-update-account>
+</div>

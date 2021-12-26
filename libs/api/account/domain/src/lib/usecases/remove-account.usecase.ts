@@ -1,9 +1,9 @@
 import { AccountRepository } from '../repositories/account.repository'
-import { UseCase } from '@nx-clean-arch/core/entities'
 import {
+  UseCase,
   RemoveAccountInput,
   RemoveAccountOutput,
-} from '../types/remove-account'
+} from '@nx-clean-arch/core/entities'
 
 export class RemoveAccountUseCase
   implements UseCase<RemoveAccountInput, RemoveAccountOutput>

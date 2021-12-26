@@ -6,6 +6,7 @@
     "api-account-domain": "libs/api/account/domain",
     "app": "apps/app",
     "app-account-data-access": "libs/app/account/data-access",
+    "app-account-domain": "libs/app/account/domain",
     "app-account-shell": "libs/app/account/shell",
     "app-e2e": "apps/app-e2e",
     "core-entities": "libs/core/entities"

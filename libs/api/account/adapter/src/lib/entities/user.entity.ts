@@ -39,7 +39,7 @@ export class User implements IUser {
   rememberToken!: boolean | null
 
   @Column('int', { primary: true, name: 'account_id' })
-  accountId!: boolean
+  accountId!: number
 
   @ManyToOne(() => Account, (account) => account.users, {
     onDelete: 'NO ACTION',

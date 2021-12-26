@@ -17,7 +17,7 @@ export interface User {
 
   rememberToken: boolean | null
 
-  accountId: boolean
+  accountId: number
 
   account: Account
 }

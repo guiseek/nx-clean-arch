@@ -1,5 +1,7 @@
+export * from './lib/usecases/find-all-users-by-account.usecase'
 export * from './lib/usecases/find-all-accounts.usecase'
 export * from './lib/usecases/find-account-by-id.usecase'
+export * from './lib/usecases/create-user-account.usecase'
 export * from './lib/usecases/create-account.usecase'
 export * from './lib/usecases/update-account.usecase'
 export * from './lib/usecases/remove-account.usecase'

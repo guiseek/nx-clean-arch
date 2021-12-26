@@ -1,4 +1,4 @@
-import { Account } from '@nx-clean-arch/core/entities'
+import { Account } from '../account'
 
 type NonNullAccount = NonNullable<Account>
 

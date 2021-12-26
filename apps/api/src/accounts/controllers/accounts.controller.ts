@@ -1,5 +1,9 @@
-import { CreateAccountDto, UpdateAccountDto } from '@nx-clean-arch/api/account/adapter'
 import { AccountsService } from '../services/accounts.service'
+import {
+  UpdateAccountDto,
+  CreateAccountDto,
+  CreateUserAccountDto,
+} from '@nx-clean-arch/api/account/adapter'
 import {
   Get,
   Post,
@@ -17,6 +21,16 @@ export class AccountsController {
   @Post()
   create(@Body() createAccountDto: CreateAccountDto) {
     return this.accountsService.create(createAccountDto)
+  }
+
+  @Post(':id/users')
+  createUser(@Body() createAccountDto: CreateUserAccountDto) {
+    return this.accountsService.createUser(createAccountDto)
+  }
+
+  @Get(':id/users')
+  findAllUsers(@Param('id') id: string) {
+    return this.accountsService.findAllUsersByAccount(+id)
   }
 
   @Get()

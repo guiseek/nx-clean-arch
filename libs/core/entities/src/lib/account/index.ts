@@ -1,3 +1,4 @@
+export * from './types/create-user'
 export * from './types/create-account'
 export * from './types/update-account'
 export * from './types/remove-account'

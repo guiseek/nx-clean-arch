@@ -1,3 +1,4 @@
+import { CreateUserAccountDto } from '../dtos/create-user-account.dto';
 import { UserRepository } from '@nx-clean-arch/api/account/domain'
 import { EntityRepository, Repository } from 'typeorm'
 import { User } from '../entities/user.entity'
@@ -9,5 +10,14 @@ export class UserTypeOrmRepository
 {
   findAll() {
     return this.find()
+  }
+
+  findAllByAccount(accountId: number) {
+    return this.find({ accountId })
+  }
+
+  createUser(account: CreateUserAccountDto) {
+    const entity = this.create(account)
+    return this.save(entity)
   }
 }

@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/account/adapter",
+  "sourceRoot": "libs/api/account/adapter/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/account/adapter/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/account/adapter"],
+      "options": {
+        "jestConfig": "libs/api/account/adapter/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

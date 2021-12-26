@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-account-adapter": "libs/api/account/adapter",
+    "api-account-domain": "libs/api/account/domain",
+    "core-entities": "libs/core/entities"
+  }
+}

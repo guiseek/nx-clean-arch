@@ -4,6 +4,9 @@
     "api": "apps/api",
     "api-account-adapter": "libs/api/account/adapter",
     "api-account-domain": "libs/api/account/domain",
+    "app": "apps/app",
+    "app-account-shell": "libs/app/account/shell",
+    "app-e2e": "apps/app-e2e",
     "core-entities": "libs/core/entities"
   }
 }

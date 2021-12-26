@@ -18,7 +18,12 @@
       "@nx-clean-arch/api/account/adapter": [
         "libs/api/account/adapter/src/index.ts"
       ],
-      "@nx-clean-arch/api/account/domain": ["libs/api/account/domain/src/index.ts"],
+      "@nx-clean-arch/api/account/domain": [
+        "libs/api/account/domain/src/index.ts"
+      ],
+      "@nx-clean-arch/app/account/shell": [
+        "libs/app/account/shell/src/index.ts"
+      ],
       "@nx-clean-arch/core/entities": ["libs/core/entities/src/index.ts"]
     }
   },

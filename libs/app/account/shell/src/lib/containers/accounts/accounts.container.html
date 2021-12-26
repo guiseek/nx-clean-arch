@@ -1,0 +1,24 @@
+<p>accounts works!</p>
+
+<table>
+  <tbody>
+    <tr *ngFor="let account of accounts$ | async">
+      <td>{{ account.id }}</td>
+      <td>{{ account.displayName }}</td>
+      <td>{{ account.email }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<form [formGroup]="createForm" ngNativeValidate (ngSubmit)="createAccount()">
+  <section>
+    <label for="displayName">Nome visível</label>
+    <input type="text" id="displayName" formControlName="displayName" required />
+  </section>
+  <section>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" required />
+  </section>
+
+  <button type="submit">Enviar</button>
+</form>

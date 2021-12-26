@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/app/account/shell",
+  "sourceRoot": "libs/app/account/shell/src",
+  "prefix": "nx-clean-arch",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/app/account/shell"],
+      "options": {
+        "jestConfig": "libs/app/account/shell/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/app/account/shell/src/**/*.ts",
+          "libs/app/account/shell/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:shell"]
+}
